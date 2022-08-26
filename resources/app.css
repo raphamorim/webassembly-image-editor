@@ -1,0 +1,56 @@
+/* silkscreen-regular - latin */
+@font-face {
+  font-family: 'Silkscreen';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../resources/silkscreen/silkscreen-v1-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../resources/silkscreen/silkscreen-v1-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../resources/silkscreen/silkscreen-v1-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../resources/silkscreen/silkscreen-v1-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../resources/silkscreen/silkscreen-v1-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../resources/silkscreen/silkscreen-v1-latin-regular.svg#Silkscreen') format('svg'); /* Legacy iOS */
+}
+
+body {
+	font-family: 'Helvetica';
+	background: #000000;
+	color: white;
+	margin-top: 10em;
+	background-size: 40px 40px;
+  	background-image:
+	    linear-gradient(to right, grey 1px, transparent 1px),
+		linear-gradient(to bottom, grey 1px, transparent 1px);
+}
+
+h1 {
+	font-family: 'Silkscreen';
+}
+
+.area {
+	background: black;
+	width: 60%;
+	height: 600px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	background-size: 10px 10px;
+  	background-image:
+	    linear-gradient(to right, grey 1px, transparent 1px),
+		linear-gradient(to bottom, grey 1px, transparent 1px);
+}
+
+.sidebar {
+	padding: 2em 1em;
+	background: #c12664;
+	float: right;
+    width: 25%;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: dodgerblue;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+}

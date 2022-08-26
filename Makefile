@@ -1,6 +1,6 @@
 build:
 	cargo build --release
-	cp target/wasm32-unknown-unknown/release/editor.wasm ./editor.wasm
+	cp target/wasm32-unknown-unknown/release/editor.wasm ./resources/editor.wasm
 	du -k ./editor.wasm
 
 watch:
@@ -8,7 +8,7 @@ watch:
 
 build-debug:
 	cargo build
-	cp target/wasm32-unknown-unknown/debug/editor.wasm ./editor.wasm
+	cp target/wasm32-unknown-unknown/debug/editor.wasm ./resources/editor.wasm
 
 lint:
 	cargo fmt --check
