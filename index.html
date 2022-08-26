@@ -7,9 +7,16 @@
 	<link rel="stylesheet" href="app.css">
 </head>
 <body>
-	<input type="file" />
-	<img id="myimage" height="400" />
+	<img id="image" src="rio-de-janeiro.jpg" height="400" />
+	
+	Change image:
+	<input type="file" accept="image/jpeg, image/png" />
 
+	<button id="reset">Reset filter</button>
+	<button id="grayscale-js">Grayscale processed by JavaScript</button>
+	<button id="sepia-js">Sepia processed by JavaScript</button>
+	<button id="grayscale-wasm">Grayscale processed by WebAssembly</button>
+	<button id="sepia-wasm">Sepia processed by WebAssembly</button>
 	<script src="app.js"></script>
 </body>
 </html>
