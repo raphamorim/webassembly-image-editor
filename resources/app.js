@@ -34,7 +34,7 @@ WebAssembly
         const startTime = performance.now();
         grayscale(wasmClampedPtr, u8Array.length);
         const endTime = performance.now();
-        updateOperationTime(startTime, endTime);
+        updateOperationTime(startTime, endTime, 'WebAssembly Grayscale');
 
         const width = image.naturalWidth || image.width;
         const height = image.naturalHeight || image.height;
@@ -57,7 +57,7 @@ WebAssembly
         const startTime = performance.now();
         sepia(wasmClampedPtr, u8Array.length);
         const endTime = performance.now();
-        updateOperationTime(startTime, endTime);
+        updateOperationTime(startTime, endTime, 'WebAssembly Sepia');
         const width = image.naturalWidth || image.width;
         const height = image.naturalHeight || image.height;
         const newImageData = context.createImageData(width, height);
@@ -68,9 +68,9 @@ WebAssembly
     });
 });
 
-function updateOperationTime(startTime, endTime) {
+function updateOperationTime(startTime, endTime, text) {
   const operationTime = document.querySelector('#operation-time');
-  operationTime.textContent = `${endTime - startTime} ms.`;
+  operationTime.textContent = `${text}: ${endTime - startTime} ms.`;
 }
 
 function processBlackAndWhite(canvas, context) {
@@ -84,7 +84,7 @@ function processBlackAndWhite(canvas, context) {
     pixels[i+2] = grayscale;
   }
   const endTime = performance.now();
-  updateOperationTime(startTime, endTime);
+  updateOperationTime(startTime, endTime, 'JavaScript Grayscale');
   context.putImageData(imageData, 0, 0);
 }
 
@@ -102,7 +102,7 @@ function processSepia(canvas, context) {
     pixels[i + 2] = (r * 0.272) + (g * 0.534) + (b * 0.131);
   }
   const endTime = performance.now();
-  updateOperationTime(startTime, endTime);
+  updateOperationTime(startTime, endTime, 'JavaScript Sepia');
   context.putImageData(imageData, 0, 0);
 };
 

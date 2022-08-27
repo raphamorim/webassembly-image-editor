@@ -2,9 +2,17 @@
 
 Image Editor powered by WebAssembly and Rust.
 
+| JavaScript | WebAssembly |
+| --- | --- |
+| ![Js demo](resources/javascript-demo.png) | ![Wasm demo](resources/wasm-demo.png) |
+
+## Try it
+
+[Try it: https://raphamorim.io/wasm-image-editor](https://raphamorim.io/wasm-image-editor)
+
 | Filter | WASM (best) | WASM (average) | JavaScript (best) |JavaScript (average) |
 | --- | --- | --- | --- | --- |
-| Grayscale | ~7ms | ~10ms | ~10ms | ~14ms |
+| [Grayscale](#grayscale) | ~7ms | ~10ms | ~10ms | ~14ms |
 | Sepia | WIP | WIP | WIP | WIP |
 
 ## Grayscale
@@ -50,13 +58,3 @@ for (var i = 0, n = pixels.length; i < n; i += 4) {
     pixels[i+2] = grayscale;
 }
 ```
-
-## Try it
-
-[Try it: https://raphamorim.io/wasm-image-editor](https://raphamorim.io/wasm-image-editor)
-
-Example with a `4.5 MiB png` image:
-
-![demo 1](resources/demo-1.png)
-
-![demo 2](resources/demo-2.png)
