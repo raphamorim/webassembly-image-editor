@@ -2,7 +2,10 @@
 
 Image Editor powered by WebAssembly and Rust.
 
-Before anything, this article can summarize few things ahead: https://javascript.plainenglish.io/webassembly-vs-javascript-can-wasm-beat-javascript-in-benchmark-cd7c30faaf7a
+| Filter | WASM (best) | WASM (average) | JavaScript (best) |JavaScript (average) |
+| --- | --- | --- | --- | --- |
+| Grayscale | ~7ms | ~10ms | ~10ms | ~14ms |
+| Sepia | WIP | WIP | WIP | WIP |
 
 ## Grayscale
 
