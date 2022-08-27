@@ -1,7 +1,7 @@
 build:
 	cargo build --release
 	cp target/wasm32-unknown-unknown/release/editor.wasm ./resources/editor.wasm
-	du -k ./editor.wasm
+	du -k ./resources/editor.wasm
 
 watch:
 	cargo watch -i *.wasm -- make build-debug
