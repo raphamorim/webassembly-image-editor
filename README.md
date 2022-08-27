@@ -15,6 +15,8 @@ Image Editor powered by WebAssembly and Rust.
 | [Grayscale](#grayscale) | ~7ms | ~10ms | ~10ms | ~14ms |
 | Sepia | WIP | WIP | WIP | WIP |
 
+Filter suggestion? Open an issue :)
+
 ## Grayscale
 
 Rust:
