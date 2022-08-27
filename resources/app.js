@@ -11,8 +11,8 @@ const wasm = {
 let originalImage = document.getElementById("image").src;
 
 const memory = new WebAssembly.Memory({
-  initial: 256,
-  maximum: 512,
+  initial: 10,
+  maximum: 100,
 });
 
 WebAssembly
