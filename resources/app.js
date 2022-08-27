@@ -78,7 +78,7 @@ WebAssembly
 
 function updateOperationTime(startTime, endTime) {
   const operationTime = document.querySelector('#operation-time');
-  operationTime.textContent = `${endTime - startTime} ms`;
+  operationTime.textContent = `${endTime - startTime} ms.`;
 }
 
 function processBlackAndWhite(canvas, context) {
