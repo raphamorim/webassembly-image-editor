@@ -43,20 +43,44 @@ fn accumulate(data: *mut u8, len: usize) -> i32 {
 }
 
 #[no_mangle]
-fn grayscale(data_ptr: *mut u8, count: usize) -> u8 {
+fn grayscale(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
 
-    // return data_ptr;
+        // The Weighted Method:
+        // Grayscale = 0.299R + 0.587G + 0.114B
+        let grayscale = ((pixels[i] as f32 * 0.3) + (pixels[i+1] as f32 * 0.59) + (pixels[i+2] as f32 * 0.11)) as u8;
 
-    // This is safe only if `data_ptr` is not null.
-    let data = unsafe { 
-        from_raw_parts_mut(data_ptr, count) 
-    };
+        // Average Method
+        // Grayscale = (R + G + B ) / 3
+        // TODO
+        pixels[i] = grayscale;
+        pixels[i+1] = grayscale;
+        pixels[i+2] = grayscale;        
+        i += 4;
+    }
+}
 
-    return data[0];
+#[no_mangle]
+fn sepia(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+        let r = pixels[i] as f32;
+        let g = pixels[i + 1] as f32;
+        let b = pixels[i + 2] as f32;
 
-    // if data.len() > 0 {
-    //     return data[1] as i32;
-    // }
-
-    // data.len() as i32
+        pixels[i] = ((r * 0.393) + (g * 0.769) + (b * 0.189)) as u8;
+        pixels[i + 1] = ((r * 0.349) + (g * 0.686) + (b * 0.168)) as u8;
+        pixels[i + 2] = ((r * 0.272) + (g * 0.534) + (b * 0.131)) as u8;
+        
+        i += 4;
+    }
 }
