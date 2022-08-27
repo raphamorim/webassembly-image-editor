@@ -21,14 +21,6 @@ WebAssembly
     const { instance } = wasm;
     const { grayscale, sepia, malloc } = instance.exports;
 
-    // result.instance.exports.memory_to_js();
-    // const memObj = new Uint8Array(result.instance.exports.memory.buffer, 0).slice(0, 1)
-    // console.log(memObj[0]) // 13
-    // const s = new Set([1, 2, 3, 4]);
-    // let jsArr = Uint8Array.from(s);
-    // const len = jsArr.length;
-    // const memVis = new Uint8Array(obj.instance.exports.memory.buffer);
-
     buttonGrayscaleWasm.addEventListener('click', () => {
       filter(image, (canvas, context) => {
         const image = document.getElementById("image");

@@ -54,7 +54,7 @@ fn grayscale(data: *mut u8, len: usize) {
         // Grayscale = 0.299R + 0.587G + 0.114B
         // let grayscale = ((pixels[i] as f32 * 0.3) + (pixels[i+1] as f32 * 0.59) + (pixels[i+2] as f32 * 0.11)) as u8;
 
-        // Average Method
+        // Average Method:
         // Grayscale = (R + G + B ) / 3
         // Theoretically, the formula is 100% correct.
         // But when writing code, you may encounter uint8 overflow error
