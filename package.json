@@ -1,0 +1,19 @@
+{
+  "name": "image-wasm",
+  "version": "0.1.0",
+  "description": "An image processing library written entirely in WebAssembly and Rust (i.e. zero external or native dependencies)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphamorim/image-wasm.git"
+  },
+  "author": "Raphael Amorim <rapha850@gmail.com>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/raphamorim/image-wasm/issues"
+  },
+  "homepage": "https://github.com/raphamorim/image-wasm#readme"
+}

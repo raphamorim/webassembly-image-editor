@@ -1,21 +1,97 @@
-# wasm-image-editor
+# image-wasm
 
-Image Editor powered by WebAssembly and Rust.
+An image processing library written entirely in WebAssembly and Rust (i.e. zero external or native dependencies).
 
-| JavaScript | WebAssembly |
+#### Try it
+
+[https://raphamorim.io/image-wasm](https://raphamorim.io/image-wasm)
+
+#### Benchmark
+
+| Feature | image-wasm (best) | image-wasm (average) | JavaScript (best) |JavaScript (average) |
+| --- | --- | --- | --- | --- |
+| [Crop](#crop) | ~0ms | ~0ms | ~0ms | ~0ms |
+| [Resize](#resize) | ~0ms | ~0ms | ~0ms | ~0ms |
+| [Mirror](#mirror) | ~0ms | ~0ms | ~0ms | ~0ms |
+| [Grayscale Filter](#grayscale) | ~7ms | ~10ms | ~10ms | ~14ms |
+| [Sepia Filter](#sepia) | ~0ms | ~0ms | ~0ms | ~0ms |
+
+Filter suggestion? Open an issue :)
+
+## Summary
+
+- [Tools](#tools)
+    - [Crop](#crop)
+    - [Resize](#resize)
+    - [Mirror](#mirror)
+- [Filters](#filters)
+    - [Grayscale](#grayscale)
+    - [Sepia](#sepia)
+
+## Demo
+
+| JavaScript | WebAssembly (`image-wasm`) |
 | --- | --- |
 | ![Js demo](resources/javascript-demo.png) | ![Wasm demo](resources/wasm-demo.png) |
 
-## Try it
+## Installing and using `image-wasm`
 
-[Try it: https://raphamorim.io/wasm-image-editor](https://raphamorim.io/wasm-image-editor)
+Install via yarn or npm:
 
-| Filter | WASM (best) | WASM (average) | JavaScript (best) |JavaScript (average) |
-| --- | --- | --- | --- | --- |
-| [Grayscale](#grayscale) | ~7ms | ~10ms | ~10ms | ~14ms |
-| Sepia | WIP | WIP | WIP | WIP |
+```sh
+yarn add image-wasm
+```
 
-Filter suggestion? Open an issue :)
+## Usage
+
+```javascript
+import grayscale from 'image-wasm/grayscale';
+
+const buttonGrayscaleJs = document.querySelector("#grayscale");
+
+// First option is get the base64 of the image:
+buttonGrayscale.addEventListener('click', (event) => {
+  const image = document.getElementById("image");
+  const base64 = grayscale(image, 'Base64');
+  image.src = base64;
+});
+```
+
+You also can get the `Uint8ClampedArray` or `ImageData`:
+
+```javascript
+buttonGrayscale.addEventListener('click', (event) => {
+  const image = document.getElementById("image");
+  const clampedArray = grayscale(image, 'Uint8ClampedArray');
+  console.log(clampedArray); // Uint8ClampedArray [...]
+  
+  const imageData = grayscale(image, 'ImageData');
+  console.log(clampedArray); // ImageData ...
+});
+```
+
+Also to receive image buffer to process it:
+
+```js
+import grayscale from 'image-wasm/grayscale';
+
+const image = document.getElementById("image");
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+canvas.width = image.naturalWidth || image.width;
+canvas.height = image.naturalHeight || image.height;
+context.drawImage(image, 0, 0);
+const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+const buffer = imageData.data.buffer;
+const u8Array = new Uint8Array(buffer);
+
+console.log(grayscale(u8Array, 'Uint8ClampedArray')); // Uint8ClampedArray
+```
+
+# Filters
+
+<img src="resources/rgb.webp" width="350px" />
 
 ## Grayscale
 
