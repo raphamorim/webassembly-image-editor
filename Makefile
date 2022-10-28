@@ -14,4 +14,4 @@ lint:
 	cargo fmt --check
 
 server:
-	python -m http.server
+	cargo server --open
