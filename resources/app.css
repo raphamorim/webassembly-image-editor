@@ -16,41 +16,50 @@ body {
 	font-family: 'Helvetica';
 	background: #000000;
 	color: white;
-	margin-top: 10em;
-	background-size: 40px 40px;
-  	background-image:
-	    linear-gradient(to right, grey 1px, transparent 1px),
-		linear-gradient(to bottom, grey 1px, transparent 1px);
+	background-size: 40px;
 }
 
 h1 {
 	font-family: 'Silkscreen';
+	font-size: 18px;
+}
+
+#operation-time {
+	font-size: 20px;
+	font-family: Helvetica;
+	color: lightyellow;
 }
 
 .area {
 	background: black;
-	width: 60%;
-	height: 600px;
+	width: 100%;
+	height: 401px;
+	margin-bottom: 10px;
 	justify-content: center;
 	display: flex;
 	align-items: center;
 	background-size: 10px 10px;
+	overflow: hidden;
   	background-image:
 	    linear-gradient(to right, grey 1px, transparent 1px),
 		linear-gradient(to bottom, grey 1px, transparent 1px);
 }
 
-.sidebar {
-	padding: 2em 1em;
+.area img {
+	height: 80%;
+}
+
+.controls {
+	padding: 10px 20px;
 	background: #c12664;
-	float: right;
-    width: 25%;
+    width: 820px;
+    margin: 0 auto;
 }
 
 input::file-selector-button {
     font-weight: bold;
     color: dodgerblue;
-    padding: 0.5em;
+    padding: 4px;
     border: thin solid grey;
     border-radius: 3px;
 }

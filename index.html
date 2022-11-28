@@ -7,21 +7,25 @@
 	<link rel="stylesheet" href="resources/app.css">
 </head>
 <body>
-	<div class="sidebar">
+	<div class="area">
+		<!-- https://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_%285mb%29.jpg -->
+		<img id="image" src="resources/snake-river.jpg" />
+	</div>
+	<div class="controls">
 		<h1>Upload a photo:</h1>
-		<input type="file" accept="image/jpeg, image/png" />
-		<h1><div id="operation-time"></div></h1>
-		<h1>Filters:</h1>
-		<p><button id="reset">Reset filter</button></p>
-		<p><button id="grayscale-js">Grayscale filter by JavaScript</button></p>
-		<p><button id="grayscale-wasm">Grayscale filter by WebAssembly</button></p>
-		<p><button id="sepia-js">Sepia filter by JavaScript</button></p>
-		<p><button id="sepia-wasm">Sepia filter by WebAssembly</button></p>
+		<input type="file" accept="image/jpeg, image/png" /> • <button id="reset">Reset filter</button>
+		<p><div id="operation-time"></div></p>
+		<h1>JavaScript:</h1>
+		<button id="grayscale-js">Grayscale</button>
+		<button id="sepia-js">Sepia</button>
+		<h1>WebAssembly:</h1>
+		<button id="grayscale-wasm">Grayscale</button>
+		<button id="sepia-wasm">Sepia</button>
+		<h1>WebAssembly with Threads:</h1>
+		<button id="grayscale-wasm-threads">Grayscale</button>
 	</div>
 
-	<div class="area">
-		<img id="image" src="resources/rio-de-janeiro.jpg" height="400" />
-	</div>
+	<script type="text/javascript" src="resources/memory.js"></script>
 	<script type="text/javascript" src="resources/filters.js"></script>
 	<script type="text/javascript" src="resources/app.js"></script>
 </body>

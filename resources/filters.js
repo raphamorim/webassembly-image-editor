@@ -1,3 +1,8 @@
+const buttonReset = document.querySelector('#reset');
+const buttonGrayscaleJs = document.querySelector('#grayscale-js');
+const buttonSepiaJs = document.querySelector('#sepia-js');
+let originalImage = document.getElementById('image').src;
+
 function convertImageToCanvas(image) {
   const canvas = document.createElement('canvas');
   canvas.width = image.naturalWidth || image.width;
@@ -55,3 +60,20 @@ function updateOperationTime(startTime, endTime, text) {
   const operationTime = document.querySelector('#operation-time');
   operationTime.textContent = `${text}: ${endTime - startTime} ms.`;
 };
+
+buttonGrayscaleJs.addEventListener('click', (event) => {
+  const image = document.getElementById('image');
+  const base64 = filter(image, processBlackAndWhite);
+  image.src = base64;
+});
+
+buttonSepiaJs.addEventListener('click', (event) => {
+  const image = document.getElementById('image');
+  const base64 = filter(image, processSepia);
+  image.src = base64;
+});
+
+buttonReset.addEventListener('click', (event) => {
+  const image = document.getElementById('image');
+  image.src = originalImage;
+});

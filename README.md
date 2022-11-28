@@ -10,10 +10,10 @@ Image Editor powered by WebAssembly and Rust.
 
 [Try it: https://raphamorim.io/wasm-image-editor](https://raphamorim.io/wasm-image-editor)
 
-| Filter | WASM (best) | WASM (average) | JavaScript (best) |JavaScript (average) |
-| --- | --- | --- | --- | --- |
-| [Grayscale](#grayscale) | ~7ms | ~10ms | ~10ms | ~14ms |
-| Sepia | WIP | WIP | WIP | WIP |
+| Filter | WebAssembly (average) | WebAssembly with Threads (average) | JavaScript (average) | 
+| --- | --- | --- | --- |
+| [Grayscale](#grayscale) | ~4ms | ~1ms | ~14ms |
+| Sepia | WIP | WIP | WIP |
 
 Filter suggestion? Open an issue :)
 
