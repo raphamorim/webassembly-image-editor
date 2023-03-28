@@ -14,6 +14,8 @@
 		<h1>Filters:</h1>
 		<p><button id="reset">Reset filter(s)</button></p>
 		<div class="list">
+			<p><button id="grayscale-js">Grayscale filter by JavaScript</button></p>
+			<p><button id="grayscale-wasm">Grayscale filter by WebAssembly</button></p>
 			<p><button id="opacity-wasm">Opacity by WebAssembly</button></p>
 			<p><button id="red-wasm">Red filter by WebAssembly</button></p>
 			<p><button id="strong-red-wasm">Strong Red filter by WebAssembly</button></p>
@@ -21,15 +23,13 @@
 			<p><button id="strong-blue-wasm">Strong Blue filter by WebAssembly</button></p>
 			<p><button id="green-wasm">Green filter by WebAssembly</button></p>
 			<p><button id="strong-green-wasm">Strong Green filter by WebAssembly</button></p>
-			<p><button id="grayscale-js">Grayscale filter by JavaScript</button></p>
-			<p><button id="grayscale-wasm">Grayscale filter by WebAssembly</button></p>
 			<p><button id="sepia-js">Sepia filter by JavaScript</button></p>
 			<p><button id="sepia-wasm">Sepia filter with u8 <-> f32 (unoptimized) by WebAssembly</button></p>
 		</div>
 	</div>
 
 	<div class="area">
-		<img id="image" src="resources/rio-de-janeiro.jpg" height="400" />
+		<img id="image" src="resources/Carta_Marina.jpeg" height="600" />
 	</div>
 	<script src="resources/app.js"></script>
 </body>
