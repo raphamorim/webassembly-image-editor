@@ -39,7 +39,7 @@ WebAssembly
   .instantiateStreaming(fetch('./resources/editor.wasm'), { js: { mem: memory } })
   .then(wasm => {
     const { instance } = wasm;
-    const { grayscale, sepia, drop_opacity, split, blue, strong_red, red, strong_green, green, malloc } = instance.exports;
+    const { grayscale, sepia, drop_opacity, strong_blue, split, blue, strong_red, red, strong_green, green, malloc } = instance.exports;
 
     createButtonListener('Opacity', '#opacity-wasm', { instance, fn: drop_opacity, malloc });
     createButtonListener('Grayscale', '#grayscale-wasm', { instance, fn: grayscale, malloc });
