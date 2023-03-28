@@ -47,6 +47,11 @@ h1 {
     width: 25%;
 }
 
+.list {
+	height: 200px;
+	overflow: scroll;
+}
+
 input::file-selector-button {
     font-weight: bold;
     color: dodgerblue;

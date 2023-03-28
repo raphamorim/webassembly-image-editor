@@ -8,5 +8,5 @@ crate-type = ["cdylib"]
 
 # https://rustwasm.github.io/docs/book/reference/code-size.html
 [profile.release]
-opt-level = 'z'
+opt-level = 's'
 lto = true

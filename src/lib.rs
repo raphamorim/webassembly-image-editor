@@ -37,6 +37,153 @@ fn grayscale(data: *mut u8, len: usize) {
 }
 
 #[no_mangle]
+fn red(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+
+        // 0
+        pixels[i + 1] = pixels[i + 1] / 2;
+        pixels[i + 2] = pixels[i + 2] / 2;
+        // 3
+        // 4
+        pixels[i + 5] = pixels[i + 5] / 2;
+        pixels[i + 6] = pixels[i + 6] / 2;
+        // 7
+        i += 8;
+    }
+}
+
+#[no_mangle]
+fn strong_red(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+
+        // 0
+        pixels[i + 1] = 0;
+        pixels[i + 2] = 0;
+        // 3
+        // 4
+        pixels[i + 5] = 0;
+        pixels[i + 6] = 0;
+        // 7
+        i += 8;
+    }
+}
+
+#[no_mangle]
+fn drop_opacity(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+
+        // 0
+        // pixels[i + 1] = 0;
+        // pixels[i + 2] = 0;
+        pixels[i + 3] = 127;
+        // 4
+        // pixels[i + 5] = 0;
+        // pixels[i + 6] = 0;
+        pixels[i + 7] = 127;
+        i += 8;
+    }
+}
+
+#[no_mangle]
+fn blue(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+
+        pixels[i] = pixels[i] / 2;
+        pixels[i + 1] = pixels[i + 1] / 2;
+        // 2
+        // 3
+        pixels[i + 4] = pixels[i + 4] / 2;
+        pixels[i + 5] = pixels[i + 5] / 2;
+        // 6
+        // 7
+        i += 8;
+    }
+}
+
+#[no_mangle]
+fn strong_blue(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+
+        pixels[i] = 0;
+        pixels[i + 1] = 0;
+        // 2
+        // 3
+        pixels[i + 4] = 0;
+        pixels[i + 5] = 0;
+        // 6
+        // 7
+        i += 8;
+    }
+}
+
+#[no_mangle]
+fn green(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+
+        pixels[i] = pixels[i] / 2;
+        // 1
+        pixels[i + 2] = pixels[i + 2] / 2;
+        // 3
+        pixels[i + 4] = pixels[i + 4] / 2;
+        // 5
+        pixels[i + 6] = pixels[i + 6] / 2;
+        // 7
+        i += 8;
+    }
+}
+
+#[no_mangle]
+fn strong_green(data: *mut u8, len: usize) {
+    let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
+    let mut i = 0;
+    loop {
+        if i >= len - 1 {
+            break;
+        }
+
+        pixels[i] = 0;
+        // 1
+        pixels[i + 2] = 0;
+        // 3
+        pixels[i + 4] = 0;
+        // 5
+        pixels[i + 6] = 0;
+        // 7
+        i += 8;
+    }
+}
+
+#[no_mangle]
 fn sepia(data: *mut u8, len: usize) {
     let pixels = unsafe { from_raw_parts_mut(data as *mut u8, len) };
     let mut i = 0;
@@ -44,6 +191,7 @@ fn sepia(data: *mut u8, len: usize) {
         if i >= len - 1 {
             break;
         }
+
         let r = pixels[i] as f32;
         let g = pixels[i + 1] as f32;
         let b = pixels[i + 2] as f32;

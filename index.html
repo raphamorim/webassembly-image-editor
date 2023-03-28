@@ -10,13 +10,22 @@
 	<div class="sidebar">
 		<h1>Upload a photo:</h1>
 		<input type="file" accept="image/jpeg, image/png" />
-		<h1><div id="operation-time"></div></h1>
+		<h3><div id="operation-time"></div></h3>
 		<h1>Filters:</h1>
-		<p><button id="reset">Reset filter</button></p>
-		<p><button id="grayscale-js">Grayscale filter by JavaScript</button></p>
-		<p><button id="grayscale-wasm">Grayscale filter by WebAssembly</button></p>
-		<p><button id="sepia-js">Sepia filter by JavaScript</button></p>
-		<p><button id="sepia-wasm">Sepia filter by WebAssembly</button></p>
+		<p><button id="reset">Reset filter(s)</button></p>
+		<div class="list">
+			<p><button id="opacity-wasm">Opacity by WebAssembly</button></p>
+			<p><button id="red-wasm">Red filter by WebAssembly</button></p>
+			<p><button id="strong-red-wasm">Strong Red filter by WebAssembly</button></p>
+			<p><button id="blue-wasm">Blue filter by WebAssembly</button></p>
+			<p><button id="strong-blue-wasm">Strong Blue filter by WebAssembly</button></p>
+			<p><button id="green-wasm">Green filter by WebAssembly</button></p>
+			<p><button id="strong-green-wasm">Strong Green filter by WebAssembly</button></p>
+			<p><button id="grayscale-js">Grayscale filter by JavaScript</button></p>
+			<p><button id="grayscale-wasm">Grayscale filter by WebAssembly</button></p>
+			<p><button id="sepia-js">Sepia filter by JavaScript</button></p>
+			<p><button id="sepia-wasm">Sepia filter with u8 <-> f32 (unoptimized) by WebAssembly</button></p>
+		</div>
 	</div>
 
 	<div class="area">

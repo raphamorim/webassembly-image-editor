@@ -1,71 +1,57 @@
 const input = document.querySelector("input");
 const buttonReset = document.querySelector("#reset");
 const buttonGrayscaleJs = document.querySelector("#grayscale-js");
-const buttonGrayscaleWasm = document.querySelector("#grayscale-wasm");
 const buttonSepiaJs = document.querySelector("#sepia-js");
-const buttonSepiaWasm = document.querySelector("#sepia-wasm");
-const wasm = {
-  grayscale: null,
-  sepial: null,
-};
 let originalImage = document.getElementById("image").src;
 
 const memory = new WebAssembly.Memory({
   initial: 10,
-  maximum: 100,
+  maximum: 200,
 });
+
+function createButtonListener(text, selector, { instance, fn, malloc }) {
+  const button = document.querySelector(selector);
+  console.log(button, selector)
+  button.addEventListener('click', () => {
+    filter(image, (canvas, context) => {
+      const image = document.getElementById("image");
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      const buffer = imageData.data.buffer;
+      const u8Array = new Uint8Array(buffer);
+      let wasmClampedPtr = malloc(u8Array.length);
+      let wasmClampedArray = new Uint8ClampedArray(instance.exports.memory.buffer, wasmClampedPtr, u8Array.length);
+      wasmClampedArray.set(u8Array);
+      const startTime = performance.now();
+      fn(wasmClampedPtr, u8Array.length);
+      const endTime = performance.now();
+      updateOperationTime(startTime, endTime, `WebAssembly ${text}`);
+      const width = image.naturalWidth || image.width;
+      const height = image.naturalHeight || image.height;
+      const newImageData = context.createImageData(width, height);
+      newImageData.data.set(wasmClampedArray);
+      context.putImageData(newImageData, 0, 0);
+      image.src = canvas.toDataURL('image/jpeg');
+    });
+  });
+}
 
 WebAssembly
   .instantiateStreaming(fetch('./resources/editor.wasm'), { js: { mem: memory } })
   .then(wasm => {
     const { instance } = wasm;
-    const { grayscale, sepia, malloc } = instance.exports;
+    const { grayscale, sepia, drop_opacity, split, blue, strong_red, red, strong_green, green, malloc } = instance.exports;
 
-    buttonGrayscaleWasm.addEventListener('click', () => {
-      filter(image, (canvas, context) => {
-        const image = document.getElementById("image");
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const buffer = imageData.data.buffer;
-        const u8Array = new Uint8Array(buffer);
-        let wasmClampedPtr = malloc(u8Array.length);
-        let wasmClampedArray = new Uint8ClampedArray(instance.exports.memory.buffer, wasmClampedPtr, u8Array.length);
-        wasmClampedArray.set(u8Array);
-        
-        const startTime = performance.now();
-        grayscale(wasmClampedPtr, u8Array.length);
-        const endTime = performance.now();
-        updateOperationTime(startTime, endTime, 'WebAssembly Grayscale');
+    createButtonListener('Opacity', '#opacity-wasm', { instance, fn: drop_opacity, malloc });
+    createButtonListener('Grayscale', '#grayscale-wasm', { instance, fn: grayscale, malloc });
+    createButtonListener('Sepia', '#sepia-wasm', { instance, fn: sepia, malloc });
 
-        const width = image.naturalWidth || image.width;
-        const height = image.naturalHeight || image.height;
-        const newImageData = context.createImageData(width, height);
-        newImageData.data.set(wasmClampedArray);
-        context.putImageData(newImageData, 0, 0);
-        image.src = canvas.toDataURL('image/jpeg');
-      });
-    });
+    createButtonListener('Red', '#red-wasm', { instance, fn: red, malloc });
+    createButtonListener('Blue', '#blue-wasm', { instance, fn: blue, malloc });
+    createButtonListener('Green', '#green-wasm', { instance, fn: green, malloc });
 
-    buttonSepiaWasm.addEventListener('click', () => {
-      filter(image, (canvas, context) => {
-        const image = document.getElementById("image");
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const buffer = imageData.data.buffer;
-        const u8Array = new Uint8Array(buffer);
-        let wasmClampedPtr = malloc(u8Array.length);
-        let wasmClampedArray = new Uint8ClampedArray(instance.exports.memory.buffer, wasmClampedPtr, u8Array.length);
-        wasmClampedArray.set(u8Array);
-        const startTime = performance.now();
-        sepia(wasmClampedPtr, u8Array.length);
-        const endTime = performance.now();
-        updateOperationTime(startTime, endTime, 'WebAssembly Sepia');
-        const width = image.naturalWidth || image.width;
-        const height = image.naturalHeight || image.height;
-        const newImageData = context.createImageData(width, height);
-        newImageData.data.set(wasmClampedArray);
-        context.putImageData(newImageData, 0, 0);
-        image.src = canvas.toDataURL('image/jpeg');
-      });
-    });
+    createButtonListener('Strong Red', '#strong-red-wasm', { instance, fn: strong_red, malloc });
+    createButtonListener('Strong Blue', '#strong-blue-wasm', { instance, fn: strong_blue, malloc });
+    createButtonListener('Strong Green', '#strong-green-wasm', { instance, fn: strong_green, malloc });
 });
 
 function updateOperationTime(startTime, endTime, text) {
@@ -132,6 +118,11 @@ buttonSepiaJs.addEventListener('click', (event) => {
   const base64 = filter(image, processSepia);
   image.src = base64;
 });
+
+function reset() {
+  const image = document.getElementById("image");
+  image.src = originalImage;
+}
 
 buttonReset.addEventListener('click', (event) => {
   const image = document.getElementById("image");
