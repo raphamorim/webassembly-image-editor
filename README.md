@@ -8,7 +8,7 @@ Image Editor powered by WebAssembly and Rust.
 
 ## Try it
 
-[Try it: https://raphamorim.io/wasm-image-editor](https://raphamorim.io/wasm-image-editor)
+https://raphamorim.io/webassembly-image-editor/
 
 | Filter | WASM (best) | WASM (average) | JavaScript (best) |JavaScript (average) |
 | --- | --- | --- | --- | --- |
